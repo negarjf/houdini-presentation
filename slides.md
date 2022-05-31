@@ -30,7 +30,7 @@ Deep dive into browser APIs
 
 <p class="author">Negar Jamalifard</p>
 
-<img class="logo" src="assets/jsworld.svg"/>
+<img class="logo" src="/assets/jsworld.svg"/>
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
@@ -130,20 +130,20 @@ layout: intro
  
 #### Blink
 
-   <img src="assets/blink.png" class="w-40 m-auto mt-5" />
+   <img src="/assets/blink.png" class="w-40 m-auto mt-5" />
 </div>
 <div class="text-center">
 
 #### Gecko
 
-   <img src="assets/gecko.png" class="w-80 m-auto mt-5" />
+   <img src="/assets/gecko.png" class="w-80 m-auto mt-5" />
 </div>
 
 <div class="text-center">
 
 #### Webkit
 
-   <img src="assets/webkit.png" class="w-40 m-auto mt-5" />
+   <img src="/assets/webkit.png" class="w-40 m-auto mt-5" />
 </div>
 
 </div>
@@ -471,7 +471,7 @@ const fontSize = box.computedStyleMap().get("font-size");
 ```
 <br />
 
-<img v-click src="assets/typedom_cssunitvalue.png" alt="CSSUnitValue in typed OM" style="height: 300px;" class="mx-auto" />
+<img v-click src="/assets/typedom_cssunitvalue.png" alt="CSSUnitValue in typed OM" style="height: 300px;" class="mx-auto" />
 
 ---
 
@@ -653,7 +653,7 @@ layout: fact
 
 # Can I use it?
 
-<img src="assets/caniuse.png" width="550" class="mx-auto"/>
+<img src="/assets/caniuse.png" width="550" class="mx-auto"/>
 
 <div class="text-center">
 
