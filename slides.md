@@ -22,77 +22,132 @@ drawings:
   persist: false
 ---
 
-# CSS Houdini
+<div class="cover">
 
+# CSS Houdini
 Deep dive into browser APIs
+</div>
+
+<p class="author">Negar Jamalifard</p>
+
+<img class="logo" src="assets/jsworld.svg"/>
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
+<style>
+.cover {
+   background-color: rgba(0,0,0, 0.5);
+   padding: 5px 0;
+   position: relative;
+ }
+.cover h1 + p {
+   opacity: 1;
+   color: #a4a4a4;
+   margin-top: 1px;
+ }
+
+.cover .author {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+ }
+
+.cover .logo {
+   width: 50px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 20px;
+ }
+</style>
+
 ---
 layout: intro
+class: text-left
 ---
 
 # About Me
 
 <div class="about-me">
-<img src="/assets/avatar.jpeg" class="rounded-full h-40 mr-20" />
+<img src="/assets/avatar.jpeg" class="avatar rounded-full h-40" />
+
+<div class="text-left w-100 mx-auto mt-8">
+
+- 🪪 ✨ Negar Jamalifard ✨
+- 👩🏽‍💻 Frontend Developer @ Lightspeed Commerce
+- 📍 Berlin 🛫 Montreal  
+- 🐦 Twitter: @NegarDev
+
+</div>
+
  
 
 </div>
 
-<br>
-<br>
-
-Read more about [Why Slidev?](https://sli.dev/guide/why)
-
-<!--
-You can have `style` tag in markdown to override the style for the current page.
-Learn more: https://sli.dev/guide/syntax#embedded-styles
--->
-
 <style>
-.about-me {
-display: flex;
+.avatar {
+   position: absolute;
+   left: 16.5%;
+   top: 41%;
+   border: 5px solid #ed5050;
+}
 
-}
-h1 {
-  /*background-color: #2B90B6;*/
-  /*background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);*/
-  /*background-size: 100%;*/
-  /*-webkit-background-clip: text;*/
-  /*-moz-background-clip: text;*/
-  /*-webkit-text-fill-color: transparent;*/
-  /*-moz-text-fill-color: transparent;*/
-}
 </style>
 
 ---
 
 # List of Content
 
-1. Rendering process in Browsers
+<div class="ml-8">
+
+1. Rendering in Browsers
    - Parsing
    - Render tree
    - Layout
    - Paint
 1. CSS Houdini
-    - Typed OM
-    - Properties and Values
-    - Paint API
+   - Typed OM
+   - Properties and Values
+   - Paint API
+   
+</div>
   
 ---
 layout: intro
 ---
 
-# How does browsers render CSS?
+# How do browsers render CSS?
 
 ---
 
-# Rendering Engine
+# Rendering Engines
 
-<img src="assets/engines.png" height="400" />
+<div class="grid grid-cols-3 gap-4 mt-20">
+
+<div class="text-center">
+ 
+#### Blink
+
+   <img src="assets/blink.png" class="w-40 m-auto mt-5" />
+</div>
+<div class="text-center">
+
+#### Gecko
+
+   <img src="assets/gecko.png" class="w-80 m-auto mt-5" />
+</div>
+
+<div class="text-center">
+
+#### Webkit
+
+   <img src="assets/webkit.png" class="w-40 m-auto mt-5" />
+</div>
+
+</div>
+
 
 ---
 
@@ -138,6 +193,8 @@ flowchart TD
 
 ::right::
 
+<v-click>
+
 ## CSSOM
 
 <br/><br/>
@@ -170,6 +227,9 @@ p --> span
 
 @enduml
 ```
+
+</v-click>
+
 
 ---
 layout: items
@@ -328,29 +388,6 @@ A -.-> B --> C & D --> E --> F --> G;
 </div>
 
 ---
-
-<br/><br/>
-
-## Setting Values
-
-```js
-el.style.transform = `translate(${xValue}px, ${yValue}px);`;
-
-```
-
-<br/>
-<br/>
-<br/>
-
-## Getting Values
-
-```js
-el.style.fontSize
-
-// '2rem'
-```
-
----
 layout: intro
 ---
 
@@ -364,18 +401,27 @@ layout: section
 
 ::right::
 
+<v-click>
+
 The main idea of this manifesto is to move the focus from creating high-level APIs to providing low-level APIs and expose the underlying layers.
+
+</v-click>
 
 ---
 layout: section
 ---
 
-# CSS Houdini...
+# CSS Houdini
 
 ::right::
 
+<v-clicks>
+
 - An umbrella term for a group of low-level APIs that are coming as a result of Extensible Web Manifesto applied to CSS
 - It is going to enable developers to have access to every phase of the rendering process and extend its behaviour
+
+</v-clicks>
+
 
 
 ---
@@ -387,9 +433,14 @@ layout: section
 
 ::right::
 
-It is an upgraded alternative for old string based CSSOM. 
+<v-click>
+
+It is an upgraded enhanced version of the CSSOM.
 - It’ll add types to css values in the form of JavaScript objects.
 - On top of that it will provide a set of semantic APIs that makes working with CSS in JavaScript more pleasant
+
+</v-click>
+
 
 ---
 
@@ -422,6 +473,22 @@ const fontSize = box.computedStyleMap().get("font-size");
 
 <img v-click src="assets/typedom_cssunitvalue.png" alt="CSSUnitValue in typed OM" style="height: 300px;" class="mx-auto" />
 
+---
+
+# Typed OM
+Setting a transform
+
+```js{1|1-2|4|6|6-7|6-9|all}
+const x = CSS.percent(-50);
+const y = CSS.percent(-50);
+
+const translation = new CSSTranslate(x, y);
+
+box.attributeStyleMap.set(
+  "transform",
+  new CSSTransformValue([translation])
+);
+```
 
 ---
 layout: fact
@@ -491,6 +558,28 @@ Houdini has introduced three worklets:
 </div>
 
 ---
+
+#  Paint API
+
+<br/><br/>
+<br/><br/>
+
+<div class="text-center">
+
+```mermaid
+flowchart LR;
+A[HTML/CSS]
+B{{Parsing}}
+C[DOM]
+D[CSSOM]
+E[Render Tree]
+F{{Layout}}
+G{{Paint}}
+A -.-> B --> C & D --> E --> F --> G; 
+```
+</div>
+
+---
 layout: two-cols
 ---
 
@@ -545,6 +634,43 @@ registerPaint('my-image', ImagePainter);
 ```
 
 </v-click>
+
+---
+layout: fact
+---
+
+# Demo
+[Code Sandbox](https://codesandbox.io/s/paint-api-demo-5ozbyv?file=/src/components/Checkbox/style.scss)
+---
+
+# Some Cool Websites
+
+- [houdini.how](https://houdini.how/)
+- [css-houdini.rocks](https://css-houdini.rocks/)
+- [Extra CSS](https://extra-css.netlify.app/)
+
+---
+
+# Can I use it?
+
+<img src="assets/caniuse.png" width="550" class="mx-auto"/>
+
+<div class="text-center">
+
+https://ishoudinireadyyet.com/
+</div>
+
+---
+layout: fact
+---
+# Thanks
+
+### Let's keep in touch: @NegarDev
+
+
+
+
+
 
 
 
